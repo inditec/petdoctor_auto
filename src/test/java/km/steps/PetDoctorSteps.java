@@ -1,15 +1,16 @@
 package km.steps;
 
-import cucumber.api.PendingException;
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import km.pages.HomePage;
 import org.junit.Assert;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.PageFactory;
 
 /**
@@ -23,17 +24,21 @@ public class PetDoctorSteps {
     String PET_DOCTOR_URL = "http://localhost:9966/petdoctor/";
 
     @Before
-    public void createWebDriver(){
-//        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-//        driver = new ChromeDriver();
-        driver = new HtmlUnitDriver();
+    public void createWebDriver() {
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        driver = new ChromeDriver();
+//        driver = new HtmlUnitDriver();
     }
 
     @After
-    public void quitWebDriver(){
+    public void quitWebDriver(Scenario scenario) {
+        if (scenario.isFailed()) {
+            final byte[] screenshot = ((TakesScreenshot) driver)
+                    .getScreenshotAs(OutputType.BYTES);
+            scenario.embed(screenshot, "image/png"); //stick it in the report
+        }
         driver.quit();
     }
-
 
     @Given("^I am on petdoctor home page$")
     public void i_am_on_pet_doctor_home_page() throws Throwable {
