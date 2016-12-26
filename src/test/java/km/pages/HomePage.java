@@ -20,10 +20,10 @@ public class HomePage {
     private WebElement homeLink;
 
     @FindBy(how = How.LINK_TEXT , using = "Find owners")
-    private WebElement findOwners;
+    private WebElement findOwnersLink;
 
     @FindBy(how = How.LINK_TEXT , using = "Veterinarians")
-    private WebElement veterinarians;
+    private WebElement veterinariansLink;
 
     @FindBy(how = How.XPATH , using = "//h2[text()='Welcome']")
     private WebElement welcomeText;
@@ -50,11 +50,11 @@ public class HomePage {
     }
 
     public boolean isFindOwnersLinkDisplayed(){
-        return homeLink.isDisplayed();
+        return findOwnersLink.isDisplayed();
     }
 
     public boolean isVeterinariansLinkDisplayed(){
-        return homeLink.isDisplayed();
+        return veterinariansLink.isDisplayed();
     }
 
     public boolean isWelcomeTextDisplayed(){
@@ -110,7 +110,7 @@ private Map<String, String> data;
      * @return the HomePage class instance.
      */
     public HomePage clickFindOwnersLink() {
-        findOwners.click();
+        findOwnersLink.click();
         return this;
     }
 
@@ -130,7 +130,7 @@ private Map<String, String> data;
      * @return the HomePage class instance.
      */
     public HomePage clickVeterinariansLink() {
-        veterinarians.click();
+        veterinariansLink.click();
         return this;
     }
 
