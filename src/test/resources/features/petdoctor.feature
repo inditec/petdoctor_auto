@@ -1,4 +1,4 @@
-@petdoctor
+@petdoctor @dev
 Feature: Tests Petdoctor application
 
   @home_page @FR1
@@ -16,7 +16,7 @@ Feature: Tests Petdoctor application
     Given I am on petdoctor home page
     Then I should see Welcome text and home page image
 
-  @find_owners_page @FR2
+  @find_owners_page @FR2 @pp
   Scenario: Verify Find owners page is displayed when Find owners link is clicked on home page
     Given I am on petdoctor home page
     When I click on Find owners link
@@ -36,3 +36,8 @@ Feature: Tests Petdoctor application
       | Krishna$                        | Last Name must contain only alphabets or spaces |
       | non existant user               | has not been found                              |
 
+  @add_owner_page @FR3 @km @pp
+  Scenario: Verify add owner page is displayed when Add Owner link is clicked on Find Owners page
+    Given I am on find owners page
+    When I click on Add Owner link
+    Then I should be on Add Owner page

@@ -6,8 +6,10 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import km.pages.AddOwnerPage;
 import km.pages.FindOwnersPage;
 import km.pages.HomePage;
+import km.utils.PropertiesReader;
 import org.junit.Assert;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -23,7 +25,8 @@ public class PetDoctorSteps {
     private WebDriver driver;
 
 
-    String PET_DOCTOR_URL = "http://localhost:9966/petdoctor/";
+//    String PET_DOCTOR_URL = "http://localhost:9966/petdoctor/";
+    String PET_DOCTOR_URL = PropertiesReader.findProperty("url");
 
     @Before
     public void createWebDriver() {
@@ -105,5 +108,20 @@ public class PetDoctorSteps {
         FindOwnersPage findOwnersPage = PageFactory.initElements(driver, FindOwnersPage.class);
         String errorMessageDisplayed = findOwnersPage.getErrorMessage();
         Assert.assertEquals(errorMessage, errorMessageDisplayed);
+    }
+
+
+    //FR3 steps start==========================
+
+    @When("^I click on Add Owner link$")
+    public void goToAddOwnerPage() throws Throwable {
+        FindOwnersPage findOwnersPage = PageFactory.initElements(driver, FindOwnersPage.class);
+        findOwnersPage.clickOnAddOwnerLink();
+    }
+
+    @Then("^I should be on Add Owner page$")
+    public void verifyAddOwnerPageIsLoaded() throws Throwable {
+        AddOwnerPage addOwnerPage = PageFactory.initElements(driver, AddOwnerPage.class);
+        Assert.assertTrue(addOwnerPage.isLoaded());
     }
 }

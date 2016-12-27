@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = {"classpath:features"},
-        tags = {"@km"},
+        tags = {"@petdoctor"},
         format = {"pretty", "html:target/reports/html", "json:target/reports/cucumber.json", "junit:target/reports/cucumber.xml"}
 )
 
