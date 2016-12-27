@@ -5,6 +5,8 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import km.pages.FindOwnersPage;
 import km.pages.HomePage;
 import org.junit.Assert;
 import org.openqa.selenium.OutputType;
@@ -41,7 +43,7 @@ public class PetDoctorSteps {
     }
 
     @Given("^I am on petdoctor home page$")
-    public void i_am_on_pet_doctor_home_page() throws Throwable {
+    public void openHomePage() throws Throwable {
 //        driver.get(PET_DOCTOR_URL);
         HomePage homePage = PageFactory.initElements(driver, HomePage.class);
         homePage.visitPetDoctor(PET_DOCTOR_URL);
@@ -68,5 +70,40 @@ public class PetDoctorSteps {
         Assert.assertTrue(homePage.isHomePageImageDisplayed());
     }
 
+    //FR2 steps start==========================
 
+    @When("^I click on Find owners link$")
+    public void clickOnFindOwnersLink() throws Throwable {
+        HomePage homePage = PageFactory.initElements(driver, HomePage.class);
+        homePage.clickOnFindOwnersLink();
+    }
+
+    @Then("^I should see Find owners page$")
+    public void verifyFindOwnersPageIsLoaded() throws Throwable {
+        FindOwnersPage findOwnersPage = PageFactory.initElements(driver, FindOwnersPage.class);
+        Assert.assertTrue(findOwnersPage.isLoaded());
+    }
+
+    @Given("^I am on find owners page$")
+    public void i_am_on_find_owners_page() throws Throwable {
+        openHomePage();
+        clickOnFindOwnersLink();
+        verifyFindOwnersPageIsLoaded();
+    }
+
+    @When("^I search for owners with text '(.+)'$")
+    public void i_search_for_owners_with_text_ab(String searchText) throws Throwable {
+        FindOwnersPage findOwnersPage = PageFactory.initElements(driver, FindOwnersPage.class);
+        if(searchText.equals("-EMPTY-")){
+            searchText = "";
+        }
+        findOwnersPage.findOwners(searchText);
+    }
+
+    @Then("^I should see error message '(.+)' next to last name$")
+    public void i_should_see_error_message_Last_Name_must_be_between_and_chars_next_to_last_name(String errorMessage) throws Throwable {
+        FindOwnersPage findOwnersPage = PageFactory.initElements(driver, FindOwnersPage.class);
+        String errorMessageDisplayed = findOwnersPage.getErrorMessage();
+        Assert.assertEquals(errorMessage, errorMessageDisplayed);
+    }
 }

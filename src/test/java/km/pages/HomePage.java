@@ -1,35 +1,35 @@
 package km.pages;
-import java.util.List;
-import java.util.Map;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.Map;
 
 public class HomePage {
     private WebDriver driver;
 
-    @FindBy(how = How.XPATH , using = "//img[contains(@src, 'banner-graphic.png')]")
+    @FindBy(how = How.XPATH, using = "//img[contains(@src, 'banner-graphic.png')]")
     private WebElement header;
 
-    @FindBy(how = How.LINK_TEXT , using = "Home")
+    @FindBy(how = How.LINK_TEXT, using = "Home")
     private WebElement homeLink;
 
-    @FindBy(how = How.LINK_TEXT , using = "Find owners")
+    @FindBy(how = How.LINK_TEXT, using = "Find owners")
     private WebElement findOwnersLink;
 
-    @FindBy(how = How.LINK_TEXT , using = "Veterinarians")
+    @FindBy(how = How.LINK_TEXT, using = "Veterinarians")
     private WebElement veterinariansLink;
 
-    @FindBy(how = How.XPATH , using = "//h2[text()='Welcome']")
+    @FindBy(how = How.XPATH, using = "//h2[text()='Welcome']")
     private WebElement welcomeText;
 
 
-    @FindBy(how = How.XPATH , using = "//img[contains(@src, 'pets.png')]")
+    @FindBy(how = How.XPATH, using = "//img[contains(@src, 'pets.png')]")
     private WebElement homePageImage;
 
 
@@ -37,38 +37,41 @@ public class HomePage {
         this.driver = driver;
     }
 
-    public void visitPetDoctor(String url){
+    public void visitPetDoctor(String url) {
         driver.get(url);
     }
 
-    public boolean isHeaderDisplayed(){
-       return header.isDisplayed();
+    public boolean isHeaderDisplayed() {
+        return header.isDisplayed();
     }
 
-    public boolean isHomeLinkDisplayed(){
+    public boolean isHomeLinkDisplayed() {
         return homeLink.isDisplayed();
     }
 
-    public boolean isFindOwnersLinkDisplayed(){
+    public boolean isFindOwnersLinkDisplayed() {
         return findOwnersLink.isDisplayed();
     }
 
-    public boolean isVeterinariansLinkDisplayed(){
+    public boolean isVeterinariansLinkDisplayed() {
         return veterinariansLink.isDisplayed();
     }
 
-    public boolean isWelcomeTextDisplayed(){
+    public boolean isWelcomeTextDisplayed() {
         return welcomeText.isDisplayed();
     }
 
-    public boolean isHomePageImageDisplayed(){
+    public boolean isHomePageImageDisplayed() {
         return homePageImage.isDisplayed();
     }
 
+    public void clickOnFindOwnersLink() {
+        findOwnersLink.click();
+    }
 
 
     //=======================================================
-private Map<String, String> data;
+    private Map<String, String> data;
 
     private int timeout = 15;
 
@@ -82,10 +85,8 @@ private Map<String, String> data;
     private final String pageUrl = "/petdoctor/";
 
 
-
     public HomePage() {
     }
-
 
 
     public HomePage(WebDriver driver, Map<String, String> data) {
@@ -99,20 +100,12 @@ private Map<String, String> data;
     }
 
 
-
-
-
-
-
     /**
      * Click on Find Owners Link.
      *
      * @return the HomePage class instance.
      */
-    public HomePage clickFindOwnersLink() {
-        findOwnersLink.click();
-        return this;
-    }
+
 
     /**
      * Click on Home Link.
