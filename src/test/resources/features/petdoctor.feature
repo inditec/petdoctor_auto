@@ -22,7 +22,7 @@ Feature: Tests Petdoctor application
     When I click on Find owners link
     Then I should see Find owners page
 
-  @find_owners_page @FR2
+  @find_owners_page @FR2 @pp
   Scenario Outline: Verify the validations for last name field on Find owners page
     Given I am on find owners page
     When I search for owners with text '<search_text>'
@@ -36,7 +36,7 @@ Feature: Tests Petdoctor application
       | Krishna$                        | Last Name must contain only alphabets or spaces |
       | non existant user               | has not been found                              |
 
-  @add_owner_page @FR3 @km @pp
+  @add_owner_page @FR3 @km
   Scenario: Verify add owner page is displayed when Add Owner link is clicked on Find Owners page
     Given I am on find owners page
     When I click on Add Owner link
